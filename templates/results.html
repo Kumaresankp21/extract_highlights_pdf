@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Highlighted Text Results</title>
+</head>
+<body>
+  <h1>Highlighted Text from PDF</h1>
+  {% for page, paragraph in paragraphs %}
+    <h3>Page {{ page }}</h3>
+    <p>{{ paragraph }}</p>
+  {% endfor %}
+  <a href="{{ url_for('upload_file') }}">Upload Another PDF</a>
+</body>
+</html>
