@@ -1,16 +1,85 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- Required meta tags -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
   <title>Highlighted Text Results</title>
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      max-width: 800px;
+      margin-top: 50px;
+    }
+    .card {
+      margin-bottom: 20px;
+      padding: 20px;
+    }
+    .highlight {
+      background-color: #ffe8a1;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+    .page-number {
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <h1>Highlighted Text from PDF</h1>
-  {% for page, paragraph in paragraphs %}
-    <h3>Page {{ page }}</h3>
-    <p>{{ paragraph }}</p>
-  {% endfor %}
-  <a href="{{ url_for('upload_file') }}">Upload Another PDF</a>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Extractly</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('upload_file') }}">Upload Another</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center my-4">
+      <h1>Highlighted Text from PDF</h1>
+      <a href="{{ url_for('download_pdf') }}" class="btn btn-primary">Download as PDF</a>
+    </div>
+    <div id="results">
+      {% for page, paragraph in paragraphs %}
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">Highlight on Page <span class="page-number">{{ page }}</span></h5>
+          <div class="highlight">
+            {{ paragraph }}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="text-center mt-4">
+      <a href="{{ url_for('upload_file') }}" class="btn btn-secondary">Upload Another PDF</a>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
