@@ -1,3 +1,4 @@
 flask 
 guvicorn
 reportlab
+PyMuPDF
